@@ -1,0 +1,238 @@
+/* Color Variables */
+:root {
+  --primary: #4A0404; /* Deep Maroon */
+  --gold: #D4AF37; /* Royal Gold */
+  --gold-glow: #F9E596;
+  --dark: #121212;
+  --text: #F8F0E3; /* Cream */
+  --bg: #1c0000;
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden; /* Prevent horizontal scroll on mobile universally */
+  overflow-y: hidden; /* Blocks scrolling until curtain opens */
+}
+
+h1, h2, h3, .hero-names, .curtain-names {
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+}
+
+.text-center { text-align: center; }
+.section-padding { padding: 80px 20px; }
+.container { max-width: 1100px; margin: 0 auto; width: 100%; }
+
+/* Section Titles */
+.section-title {
+  text-align: center;
+  color: var(--gold);
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: var(--gold);
+}
+
+/* Gold Button */
+.gold-btn {
+  background: linear-gradient(45deg, #A67C00, #F9E596, #D4AF37);
+  color: var(--primary);
+  border: none;
+  padding: 15px 35px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 30px;
+  font-family: 'Cinzel', serif;
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 300px; /* Safe size for mobile */
+}
+.gold-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+}
+
+/* --- Curtain Entry Animation --- */
+.curtain-container {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; 
+  height: 100vh; height: 100dvh; /* dvh fixes mobile browser jumps */
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+.curtain {
+  position: absolute;
+  top: 0;
+  width: 50vw;
+  height: 100vh; height: 100dvh;
+  background: linear-gradient(to right, #3A0303, var(--primary), #3A0303);
+  z-index: 10;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+}
+.curtain::after { /* Fold texture */
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(to right, transparent, transparent 10%, rgba(0,0,0,0.2) 15%, transparent 20%);
+}
+.curtain-left { left: 0; border-right: 8px solid var(--gold); }
+.curtain-right { right: 0; border-left: 8px solid var(--gold); }
+
+.curtain-content {
+  position: relative;
+  z-index: 20;
+  text-align: center;
+  background: rgba(0,0,0,0.6);
+  padding: 40px;
+  border: 2px solid var(--gold);
+  border-radius: 15px;
+  backdrop-filter: blur(5px);
+  width: 90%; /* Stops edge-to-edge overflow on small phones */
+  max-width: 600px;
+}
+.pre-title { font-size: 1.2rem; margin-bottom: 10px; font-weight: 300; }
+.curtain-names { font-family: 'Great Vibes', cursive; font-size: 4rem; color: var(--gold); text-shadow: 0 0 10px rgba(212,175,55,0.8); margin: 10px 0; }
+.curtain-subtitle { font-size: 1.5rem; margin-bottom: 30px; letter-spacing: 2px; }
+
+/* --- Audio Toggle --- */
+#music-toggle {
+  position: fixed; bottom: 30px; right: 30px;
+  background: var(--gold); color: var(--primary);
+  border: none; border-radius: 50%;
+  width: 50px; height: 50px;
+  font-size: 1.5rem;
+  z-index: 9000; cursor: pointer;
+  box-shadow: 0 0 15px rgba(212,175,55,0.6);
+  transition: all 0.5s ease;
+}
+
+/* --- Falling Petals --- */
+#petals-container {
+  position: fixed; top: 0; left: 0; width: 100vw; 
+  height: 100vh; height: 100dvh;
+  pointer-events: none; z-index: 1000; overflow: hidden;
+}
+.petal {
+  position: absolute;
+  background-color: #ff3b3b;
+  border-radius: 15px 0 15px 0;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
+  opacity: 0.8;
+}
+
+/* --- Hero Section --- */
+.hero {
+  height: 100vh; height: 100dvh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?q=80&w=2069&auto=format&fit=crop') center/cover;
+  display: flex; justify-content: center; align-items: center; text-align: center;
+  padding: 0 20px;
+}
+.hero-date { font-size: 1.5rem; letter-spacing: 3px; color: var(--gold); margin-bottom: 10px; }
+.hero-names { font-family: 'Great Vibes', cursive; font-size: 6rem; color: var(--gold); text-shadow: 0 0 20px rgba(212,175,55,0.6); margin-bottom: 20px; }
+.hero-location { font-size: 1.2rem; font-weight: 300; }
+
+/* --- Couple Section --- */
+.couple-grid {
+  display: flex; align-items: center; justify-content: center; gap: 40px;
+}
+.person { text-align: center; flex: 1; }
+.person img {
+  width: 250px; height: 250px; border-radius: 50%;
+  object-fit: cover; border: 5px solid var(--gold);
+  margin-bottom: 20px; box-shadow: 0 0 20px rgba(212,175,55,0.3);
+}
+.person h3 { color: var(--gold); font-size: 1.8rem; margin-bottom: 10px; }
+.heart-divider { font-size: 3rem; color: var(--gold); animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.2); text-shadow: 0 0 15px var(--gold); } 100% { transform: scale(1); } }
+
+/* --- Timeline Section --- */
+.timeline { position: relative; max-width: 800px; margin: 0 auto; }
+.timeline::after { content: ''; position: absolute; width: 4px; background: var(--gold); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
+.timeline-item { padding: 10px 40px; position: relative; width: 50%; box-sizing: border-box; }
+.timeline-item::after { content: ''; position: absolute; width: 20px; height: 20px; background: var(--bg); border: 4px solid var(--gold); border-radius: 50%; top: 20px; z-index: 1; }
+.left { left: 0; }
+.right { left: 50%; }
+.left::after { right: -12px; }
+.right::after { left: -12px; }
+.timeline-content {
+  padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3);
+  border-radius: 10px; text-align: left;
+}
+.timeline-content h3 { color: var(--gold); font-size: 1.5rem; margin-bottom: 10px; }
+.event-date { font-weight: 600; color: #aaa; margin-bottom: 10px; }
+
+/* --- Venue Section --- */
+.venue-content { background: rgba(0,0,0,0.4); border: 1px solid var(--gold); border-radius: 15px; padding: 40px; text-align: center; }
+.venue-icon { font-size: 3rem; color: var(--gold); margin-bottom: 15px; }
+.venue-details h3 { font-size: 2rem; margin-bottom: 10px; color: var(--gold); }
+.map-container { margin-top: 30px; border-radius: 10px; overflow: hidden; border: 2px solid var(--gold); }
+
+/* --- RSVP Section --- */
+.rsvp-form { max-width: 500px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; align-items: center; }
+.rsvp-form input, .rsvp-form select {
+  width: 100%; /* Fixes mobile overflow */
+  padding: 15px; background: transparent; border: 1px solid var(--gold);
+  color: var(--text); border-radius: 5px; font-family: 'Montserrat', sans-serif; font-size: 1rem;
+}
+.rsvp-form input::placeholder { color: #ccc; }
+.rsvp-form select option { background-color: var(--bg); color: var(--text); } /* Fix text visibility on drop-down */
+
+/* --- Footer --- */
+footer { text-align: center; padding: 50px 20px; background: #000; border-top: 2px solid var(--gold); }
+footer h2 { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--gold); margin-bottom: 10px; }
+
+/* --- Mobile Responsive Design --- */
+@media screen and (max-width: 768px) {
+  .section-padding { padding: 50px 15px; }
+  .section-title { font-size: 2rem; margin-bottom: 30px; }
+
+  .curtain-content { padding: 25px 15px; }
+  .curtain-names { font-size: 3rem; }
+  .curtain-subtitle { font-size: 1.2rem; }
+  
+  .hero-names { font-size: 4rem; }
+  .hero-date { font-size: 1.2rem; }
+  .hero-location { font-size: 1rem; }
+  
+  .couple-grid { flex-direction: column; gap: 20px; }
+  .heart-divider { transform: rotate(0deg); margin: 10px 0; }
+  .person img { width: 220px; height: 220px; }
+
+  /* Perfected Mobile Timeline Bug Fixes */
+  .timeline::after { left: 31px; }
+  .timeline-item { width: 100%; padding-left: 70px; padding-right: 0; }
+  .right { left: 0; }
+  .left::after, .right::after { 
+    left: 21px; 
+    right: auto; /* Fixes dot stretching bug on the left container */
+  }
+
+  .venue-content { padding: 25px 15px; }
+  .venue-details h3 { font-size: 1.5rem; }
+
+  /* Optimized Mobile Audio Icon Positioning */
+  #music-toggle { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.2rem; }
+}
